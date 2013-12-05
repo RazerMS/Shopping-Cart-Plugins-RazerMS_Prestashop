@@ -26,7 +26,7 @@ class MOLPay extends PaymentModule {
         
         $this->name = 'molpay';        
         $this->tab = 'payments_gateways';
-        $this->version = 2.3;
+        $this->version = 2.0;
         $this->bout_valide = $this->l('Validate');        
         $this->currencies = true;
         $this->currencies_mode = 'checkbox';        
