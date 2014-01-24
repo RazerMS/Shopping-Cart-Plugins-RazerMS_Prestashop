@@ -21,9 +21,6 @@ class MOLPay extends PaymentModule {
      * 
      */
     public function __construct() {
-        
-        parent::__construct();
-        
         $this->name = 'molpay';        
         $this->tab = 'payments_gateways';
         $this->version = 2.0;
@@ -46,6 +43,8 @@ class MOLPay extends PaymentModule {
             $this->warning = $this->l('No currency set for this module');
         if(!isset($this->MOLPAY_MERCHANT_VKEY) || !isset($this->MOLPAY_MERCHANT_ID))
             $this->warning = $this->l('Your MOLPay account must be set correctly');
+        
+        parent::__construct();
     }        
 
     /**
@@ -53,7 +52,7 @@ class MOLPay extends PaymentModule {
      * 
      * @return boolean
      */
-    function install() {        
+    function install() {
         if (!parent::install() || !$this->registerHook('payment') || !$this->registerHook('paymentReturn') || !$this->registerHook('header'))
             return false;
         else
