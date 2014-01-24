@@ -4,7 +4,7 @@
 *
 * @package Payment Method
 * @author MOLPay Technical Team <technical@molpay.com>
-* @version 1.0.0
+* @version 2.1
 *
 */
 
@@ -23,7 +23,7 @@ class MOLPay extends PaymentModule {
     public function __construct() {
         $this->name = 'molpay';        
         $this->tab = 'payments_gateways';
-        $this->version = 2.0;
+        $this->version = 2.1;
         $this->bout_valide = $this->l('Validate');        
         $this->currencies = true;
         $this->currencies_mode = 'checkbox';        
