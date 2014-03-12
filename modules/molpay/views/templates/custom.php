@@ -33,7 +33,7 @@
                 <?php endif; ?>
                 <hr>
             </div>
-            <form action="<?= $_SERVER['REQUEST_URI'] ?>&gotoorder=" method="POST" id="molpay-form">
+            <form action="<?php echo $_SERVER['REQUEST_URI'] ?>&gotoorder=" method="POST" id="molpay-form">
                 <?php foreach($_POST as $name => $value): ?>
                 <input type="hidden" name="<?= $name; ?>" value="<?= $value; ?>" />            
                 <?php endforeach; ?>
