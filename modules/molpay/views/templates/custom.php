@@ -35,7 +35,7 @@
             </div>
             <form action="<?php echo $_SERVER['REQUEST_URI'] ?>&gotoorder=" method="POST" id="molpay-form">
                 <?php foreach($_POST as $name => $value): ?>
-                <input type="hidden" name="<?= $name; ?>" value="<?= $value; ?>" />            
+                <input type="hidden" name="<?php echo $name; ?>" value="<?php echo $value; ?>" />            
                 <?php endforeach; ?>
                 <div class="centerme">
                     <button type="submit" class="btn btn-info btn-lg">Click here to continue</button>
