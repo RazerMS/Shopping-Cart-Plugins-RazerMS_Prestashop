@@ -15,7 +15,7 @@ assistance, please email support@molpay.com
 Installations for Prestashop version 1.5.6.0 and above
 ------------------------------------------------------
 
-- Download this plugin for release channel [Version 2.x.x](https://github.com/MOLPay/Prestashop_Plugin/tree/v1.5.6.0), Extract/Unzip the files.
+- Download or clone this repository.
 
 - Upload or copy those file and folder into your Prestashop root folder.
 
