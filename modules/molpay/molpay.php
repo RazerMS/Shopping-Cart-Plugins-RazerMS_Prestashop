@@ -1,239 +1,279 @@
 <?php
 /**
- * MOLPay Prestashop Plugin
- * 
- * @package Payment Method
- * @author MOLPay Technical Team <technical@molpay.com>
- * @version 1.0.0
- * 
- */
+* MOLPay Prestashop Plugin
+*
+* @package Payment Method
+* @author MOLPay Technical Team <technical@molpay.com>
+* @version 2.1
+*
+*/
 
-class MOLPay extends PaymentModule {	
+if (!defined('_PS_VERSION_'))
+    exit;
 
-    /**
-     * Prestashop HTML code
-     *  
-     * @var string
-     */
+class MOLPay extends PaymentModule {
     private $_html = '';
-    
-    /**
-     * Prestashop error
-     * 
-     * @var array
-     */
     private $_postErrors = array();
-    
-    /**
-     * MOLPay API URI
-     * 
-     * @var string
-     */
-    private $molpay_url;
+    public $bout_valide;
 
     /**
-     * Construct molpay object
+     * Initialize the MOLPay payment method
      * 
      */
-    public function __construct() {        
-        parent::__construct();
-        $this->molpay_url = 'https://www.onlinepayment.com.my/MOLPay/pay/';
-        $this->name = 'molpay';
+    public function __construct() {
+        $this->name = 'molpay';        
         $this->tab = 'payments_gateways';
-        $this->version = '1.2';
+        $this->version = 2.1;
+        $this->bout_valide = $this->l('Validate');        
+        $this->currencies = true;
+        $this->currencies_mode = 'checkbox';        
+        $config = Configuration::getMultiple(array('MOLPAY_MERCHANT_VKEY', 'MOLPAY_MERCHANT_ID'));
+		
+        if(isset($config['MOLPAY_MERCHANT_VKEY']))
+            $this->MOLPAY_MERCHANT_VKEY = $config['MOLPAY_MERCHANT_VKEY'];
+        if(isset($config['MOLPAY_MERCHANT_ID']))
+            $this->MOLPAY_MERCHANT_ID = $config['MOLPAY_MERCHANT_ID'];
+               
+        $this->page = basename(__FILE__, '.php');
         $this->displayName = 'MOLPay Malaysia Online Payment Gateway';
-        $this->description = $this->l('Accepts payment by <a href=http://www.molpay.com target=_blank>MOLPay Sdn Bhd</a>');
-        $this->confirmUninstall = $this->l('Are you sure you want to delete your MOLPay Payment Module details ?');
-    }
+        $this->description = $this->l('Accept payments with MOLPay');
+        $this->confirmUninstall = $this->l('Are you sure you want to delete your details ?');
+
+        if(!count(Currency::checkPaymentCurrencies($this->id)))
+            $this->warning = $this->l('No currency set for this module');
+        if(!isset($this->MOLPAY_MERCHANT_VKEY) || !isset($this->MOLPAY_MERCHANT_ID))
+            $this->warning = $this->l('Your MOLPay account must be set correctly');
+        
+        parent::__construct();
+    }        
 
     /**
-     * Install the module using Prestashop installer
+     * Install the MOLPay module into prestashop
      * 
      * @return boolean
      */
-    public function install() {        
-        if (!parent::install() || !Configuration::updateValue('MOLPAY_MERCHANT') || !Configuration::updateValue('MOLPAY_VKEY') || !$this->registerHook('payment'))
+    function install() {
+        if (!parent::install() || !$this->registerHook('payment') || !$this->registerHook('paymentReturn') || !$this->registerHook('header'))
             return false;
         else
-            return true;		
+            return true;
     }
-
+    
     /**
-     * Uninstall the module using Prestashop Configuration Class
+     * Uninstall the MOLPay module from prestashop
      * 
-     * @return mixed
+     * @return boolean
      */
-    public function uninstall() {        
-        Configuration::deleteByName('MOLPAY_MERCHANT');
-        Configuration::deleteByName('MOLPAY_VKEY');
-        return parent::uninstall();
+    function uninstall() {
+        if (!Configuration::deleteByName('MOLPAY_MERCHANT_VKEY') || !Configuration::deleteByName('MOLPAY_MERCHANT_ID') || !parent::uninstall())
+            return false;
+        else
+            return true;
     }
 
     /**
-     * Display backend view (after validation) for merchant to register MOLPay configuration
+     * Validate the form submited by MOLPay configuration setting
+     * 
+     */
+    private function _postValidation() {
+        if (Tools::isSubmit('btnSubmit')) {
+            if (!Tools::getValue('merchant_id'))
+                $this->_postErrors[] = $this->l('Merchant ID is required');
+            else if (!Tools::getValue('merchant_vkey'))
+                $this->_postErrors[] = $this->l('Merchant VKey is required.');
+        }
+    }
+
+    /**
+     * Save/update the MOLPay configuration setting
+     * 
+     */
+    private function _postProcess() {
+        if (isset($_POST['btnSubmit'])) {
+            Configuration::updateValue('MOLPAY_MERCHANT_ID', Tools::getValue('merchant_id'));
+            Configuration::updateValue('MOLPAY_MERCHANT_VKEY', Tools::getValue('merchant_vkey'));
+        }		
+        $this->_html .= '<div class="conf confirm"> '.$this->l('Settings updated').'</div>';
+    }
+    
+    /**
+     * Display notification after saving the MOLPay configuration setting
+     * 
+     */
+    private function _displayMOLPay() {
+        $this->_html .= '<img src="../modules/molpay/img/molpay.gif" style="float:left; margin-right:15px;"><b>'.$this->l('This module allows you to accept payments by MOLPay.').'</b><br /><br />
+        '.$this->l('You need to register on the site').' <a href="http://molpay.com" target="blank">Molpay.com</a> <br /><br /><br />';
+    }
+    
+    /**
+     * Display the form to provide the MOLPay configuration setting
+     * 
+     */
+    private function _displayForm() {
+        $this->_html .=
+        '<form action="'.$_SERVER['REQUEST_URI'].'" method="post">
+            <fieldset>
+            <legend><img src="../img/admin/contact.gif" />'.$this->l('Contact details').'</legend>
+                <table border="0" width="500" cellpadding="0" cellspacing="0" id="form">
+                    <tr><td colspan="2">'.$this->l('Please specify the Merchant VKey and a unique MerchantID registered in the molpay system').'.<br /><br /></td></tr>
+                    <tr><td width="140" style="height: 35px;">'.$this->l('Merchant ID').'</td><td><input type="text" name="merchant_id" value="'.htmlentities(Tools::getValue('merchant_id', $this->MOLPAY_MERCHANT_ID), ENT_COMPAT, 'UTF-8').'" style="width: 300px;" /></td></tr>
+                    <tr><td width="140" style="height: 35px;">'.$this->l('Merchant VKey').'</td><td><input type="text" name="merchant_vkey" value="'.htmlentities(Tools::getValue('merchant_vkey', $this->MOLPAY_MERCHANT_VKEY), ENT_COMPAT, 'UTF-8').'" style="width: 300px;" /></td></tr>
+                    <tr><td colspan="2" align="center"><br /><input class="button" name="btnSubmit" value="'.$this->l('Update settings').'" type="submit" /></td></tr>
+                </table>
+            </fieldset>
+        </form>';
+    }
+
+    /**
+     * Display the MOLPay configuration setting. <call private method>
      * 
      * @return string
      */
-    public function getContent() {
+    function getContent() {
         $this->_html = '<h2>'.$this->displayName.'</h2>';
-        if (!empty($_POST)) {
+        if (Tools::isSubmit('btnSubmit')) {
             $this->_postValidation();
-            if (!sizeof($this->_postErrors))
+            if (!count($this->_postErrors))
                 $this->_postProcess();
-            else {
-                foreach ($this->_postErrors AS $err) {
-                    $errs.= '<p>- '.$err.'</p>';                    
-                }            
-                $this->_html .= '<div class="alert error">' . $errs . '</div>';
-            }
+            else
+                foreach ($this->_postErrors as $err)
+                    $this->_html .= '<div class="alert error">' . $err . '</div>';
         }
         else
             $this->_html .= '<br />';
 
+        $this->_displayMOLPay();
         $this->_displayForm();
         return $this->_html;
     }
 
     /**
-     * Validate MOLPay backend configurations at backend code
+     * Hook MOLPay stylesheet to prestashop header method
      * 
+     * @global array $smarty
+     * @global array $cookie
+     * @param mixed $params
      */
-    private function _postValidation() {
-        if (isset($_POST['submitModule'])) {
-            if (empty($_POST['mp_merchant']))
-                $this->_postErrors[] = $this->l('MOLPay Merchant ID is required.');
-            if (empty($_POST['mp_vkey']))
-                $this->_postErrors[] = $this->l('MOLPay Verify Key is required.');
-        }
-    }
-
-    /**
-     * Process the MOLPay backend configurations at backend code
-     * 
-     */
-    private function _postProcess() {
-        if (isset($_POST['submitModule'])) {
-            Configuration::updateValue('MOLPAY_MERCHANT', $_POST['mp_merchant']);
-            Configuration::updateValue('MOLPAY_VKEY', $_POST['mp_vkey']);
-        }
-        $this->_html .= '<div class="conf confirm"><img src="../img/admin/ok.gif" alt="' . $this->l('ok') . '" /> '.
-        $this->l('Settings updated') . '</div>';
-    }
-
-    /**
-     * Display the HTML form for admin to input the MOLPay configuration
-     * 
-     */
-    private function _displayForm() {
-	$this->_html .= '
-        <fieldset><legend><img src="../modules/' . $this->name.'/logo.gif" alt="" /> ' . $this->l('MOLPay Module Guide') . '</legend>
-            <h4>' . $this->l('Please follow instruction below to configure this MOLPay module :') . '</h4>
-            - <b>' . $this->l('MOLPay Merchant ID : ') . '</b>Put your Merchant ID provided by MOLPay.<br><br>
-            - <b>' . $this->l('MOLPay Verify Key : ') . '</b>Provide your Verify Key. It makes the transaction more secure.<br><br>
-        </fieldset><br />
-        <form action="' . Tools::htmlentitiesutf8($_SERVER['REQUEST_URI']) . '" method="post">
-            <fieldset class="width2">
-                <legend><img src="../img/admin/contact.gif" alt="" />' . $this->l('Settings') . '</legend>
-                <label for="mp_merchant">' . $this->l('MOLPay Merchant ID') . '</label>
-                <div class="margin-form"><input type="text" size="20" id="mp_merchant" name="mp_merchant" value="' . Configuration::get('MOLPAY_MERCHANT') . '" /></div>
-                <label for="mp_vkey">' . $this->l('MOLPay Verify Key') . '</label>
-                <div class="margin-form"><input type="text" size="20" id="mp_vkey" name="mp_vkey" value="' . Configuration::get('MOLPAY_VKEY') . '" /></div>
-                <br /><center><input type="submit" name="submitModule" value="' . $this->l('Update settings') . '" class="button" /></center>
-            </fieldset>
-        </form>';       
+    public function hookHeader($params) {
+        global $smarty, $cookie;
+        $this->context->controller->addCSS(($this->_path) . 'css/molpay.css', 'all');
     }
     
     /**
-     * Display the HTML form when user selecting the payment method and bind to smarty view
+     * Hook the payment form to the prestashop Payment method. Display in payment method selection
      * 
-     * @global object $smarty
-     * @global object $cart
-     * @global object $cookie
      * @param array $params
      * @return string
      */
     public function hookPayment($params) {
-        global $smarty, $cart, $cookie;
-
-        $address = new Address(intval($params['cart']->id_address_invoice));
-        $customer = new Customer(intval($params['cart']->id_customer));
-        $mp_merchant = Configuration::get('MOLPAY_MERCHANT');
-        $mp_vkey = Configuration::get('MOLPAY_VKEY');
-        $mp_paylink = $this->getNBUrl() . $mp_merchant . "/";
-
-        $currency_obj = $this->getCurrency();
-        $curr_cart_id = $cart->id_currency;
-        while ( list($k, $v) = each($currency_obj)){
-            if ( $currency_obj[$k]['id_currency'] == $curr_cart_id )
-                $curr_ret = $currency_obj[$k];
-        }
-                  
-        $currency_code = $curr_ret['iso_code'];
-        $orderid = intval($params['cart']->id);
-        $amount = $params['cart']->getOrderTotal(true, 3);
-        $bill_name = $customer->firstname . " " . $customer->lastname;
+        if (!$this->active)
+            return;
+        if (!$this->checkCurrency($params['cart']))
+            return;		
+			
+        $address     = new Address(intval($params['cart']->id_address_invoice));
+        $customer    = new Customer((int)$this->context->cart->id_customer);
+        $mp_merchant = Configuration::get('MOLPAY_MERCHANT_ID');
+        $mp_vkey     = Configuration::get('MOLPAY_MERCHANT_VKEY');
+        
+        $currency_obj = $this->context->currency;
+        $currency_code = $currency_obj->iso_code;
+        $orderid = (int)$this->context->cart->id;
+        $amount = $amount = $this->context->cart->getOrderTotal(true, Cart::BOTH);
+        $bill_name = $customer->firstname." ".$customer->lastname;
         $bill_email = $customer->email;
-
-        $country_obj = new Country(intval($address->id_country));
+        
+        $country_obj =  new Country(intval($address->id_country));
         $country = $country_obj->iso_code;
         $country_name_obj = $country_obj->name;
-        $country_name = $country_name_obj[1];
-
+        $country_name =  $country_name_obj[1];
+        
         $add_obj = new Address(intval($params['cart']->id_address_invoice));
-        $add .= "----------------------------------\nBilling Address\n----------------------------------\n";
-        $add .= $add_obj->address1 . " " . $add_obj->address2 . " " . $add_obj->postcode . " " . $add_obj->city . " " . $country_name;
-
+        $add = "";
+        $add.="----------------------------------\nBilling Address\n----------------------------------\n";
+        $add.= $add_obj->address1." ".$add_obj->address2." ".$add_obj->postcode." ".$add_obj->city." ".$country_name;
+        
         $prod_obj = $params['cart']->getProducts();
         $size = sizeof($prod_obj);
-        $prod .= "\n\n\n----------------------------------\nProduct(s) Info\n----------------------------------\n";
-        for( $i=0; $i<$size; $i++ ) {
-            $prod .= $prod_obj[$i]['name'] . " x " . $prod_obj[$i]['cart_quantity'];
-            $prod .= "\n";
+        $prod = "";
+        $prod.= "\n\n\n----------------------------------\nProduct(s) Info\n----------------------------------\n";
+        for($i=0; $i<$size; $i++) {
+            $prod.= $prod_obj[$i]['name']." x ".$prod_obj[$i]['cart_quantity'];
+            $prod.= "\n";
         }
 
         //$cart = new Cart(intval($orderid));
-        $bill_desc = $add . $prod;
-        $vcode = md5($amount . $mp_merchant . $orderid . $mp_vkey);
 
-        $smarty->assign(array(            
+        $bill_desc = $add.$prod;
+        $vcode = md5($amount.$mp_merchant.$orderid.$mp_vkey);
+
+        $this->smarty->assign(array(
             'amount' => $amount,
             'orderid' => $orderid,
             'mp_merchant' => $mp_merchant,
             'bill_name' => $bill_name,
             'bill_email' => $bill_email,
             'bill_desc' => $bill_desc,
-            'mp_paylink' => $mp_paylink,
+            'molpayUrl' => 'https://www.onlinepayment.com.my/MOLPay/pay/'.$mp_merchant.'/',
             'currency' => $currency_code,
             'country' =>  $country,
             'vcode'   => $vcode,
-            'returnurl' => 'http://' . htmlspecialchars($_SERVER['HTTP_HOST'], ENT_COMPAT, 'UTF-8') . __PS_BASE_URI__ . 'modules/molpay/validation.php',
+            'returnurl' => 'http://'.$_SERVER['HTTP_HOST'].__PS_BASE_URI__.'index.php?fc=module&module=molpay&controller=validation',
             'this_path' => $this->_path
         ));
 
-        return $this->display(__FILE__, 'molpay.tpl');
-    }
-    
-    /**
-     * Get the MOLPay URL
-     * 
-     * @return string
-     */
-    public function getNBUrl() {
-        return $this->molpay_url;
+        return $this->display(__FILE__, 'payment.tpl');
     }
 
     /**
-     * Define the message when status have been received (return payment)
+     * Hook the payment return to the prestashop payment return method
      * 
-     * @param string|int $key
+     * @param array $params
      * @return string
      */
-    public function getL($key) {
-        $translations = array(
-            '00' => $this->l('Payment with MOLPay Malaysia Online Payment Gateway (Transaction ID :'),
-            '-1' => $this->l('Payment with MOLPay Malaysia Online Payment Gateway is Failed (Transaction ID : ')
-        );
-        return $translations[$key];
+    public function hookPaymentReturn($params) {
+        if (!$this->active)
+            return;
+
+        $state = $params['objOrder']->getCurrentState();
+        if ($state == Configuration::get('PS_OS_PAYMENT')) {
+            $this->smarty->assign(array(
+                'status' => '00',
+                'id_order' => $params['objOrder']->id
+            ));
+            if(isset($params['objOrder']->reference) && !empty($params['objOrder']->reference))
+                $this->smarty->assign('reference', $params['objOrder']->reference);
+        }		
+        else if ($state == Configuration::get('PS_OS_ERROR')) {
+            $this->smarty->assign(array(
+                'status' => '11',
+                'id_order' => $params['objOrder']->id
+            ));
+            if (isset($params['objOrder']->reference) && !empty($params['objOrder']->reference))
+                $this->smarty->assign('reference', $params['objOrder']->reference);
+        }
+        else
+            $this->smarty->assign('status', 'other');
+			
+        return $this->display(__FILE__, 'payment_return.tpl');
     }
+
+    /**
+     * Check the currency
+     * 
+     * @param object $cart
+     * @return boolean
+     */
+    public function checkCurrency($cart) {
+        $currency_order = new Currency($cart->id_currency);
+        $currencies_module = $this->getCurrency($cart->id_currency);
+
+        if (is_array($currencies_module))
+            foreach ($currencies_module as $currency_module)
+                if ($currency_order->id == $currency_module['id_currency'])
+                    return true;
+        return false;
+    }	
 }
+
 ?>
