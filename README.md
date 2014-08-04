@@ -12,7 +12,7 @@ Use at your own risk. Please backup any critical data before proceeding. For any
 assistance, please email support@molpay.com 
 
 
-Installations for Prestashop version 1.5.6.0 and above
+Installations for Prestashop version 1.5.6.x/1.6.0.x and above
 ------------------------------------------------------
 
 - Download or clone this repository.
