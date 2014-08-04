@@ -17,7 +17,7 @@ Installations for Prestashop
 
 [Prestashop version 1.5.5.x and below](https://github.com/MOLPay/Prestashop_Plugin/wiki/Installation-for-prestashop-version-1.5.5.x-and-below)  
 
-[Prestashop version 1.5.6.x and above](https://github.com/MOLPay/Prestashop_Plugin/wiki/Installation-for-Prestashop-version-1.5.6.x-and-above)
+[Prestashop version 1.5.6.x/1.6.0.x and above](https://github.com/MOLPay/Prestashop_Plugin/wiki/Installation-for-Prestashop-version-1.5.6.x-and-above)
 
 
 Contribution
