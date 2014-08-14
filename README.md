@@ -35,6 +35,7 @@ Installations for Prestashop version 1.5.6.x/1.6.0.x and above
   ``Return URL : http://xxxxxxxxxxxxxx/index.php?fc=module&module=molpay&controller=validation``
 
   ``Callback URL : http://xxxxxxxxxxxxxx/index.php?fc=module&module=molpay&controller=callback`` 
+  
 *Replace xxxxxxxxxxxxxx with your shoppingcart domain
 
 - Save the configuration.
