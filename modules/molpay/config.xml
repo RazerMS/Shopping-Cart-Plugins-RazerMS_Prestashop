@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-    <name>molpay</name>
-    <displayName><![CDATA[MOLPay Malaysia Online Payment Gateway]]></displayName>
-    <version><![CDATA[1.2]]></version>
-    <description><![CDATA[Accepts payment by &lt;a href=http://www.molpay.com target=_blank&gt;MOLPay Sdn Bhd&lt;/a&gt;]]></description>
-    <author><![CDATA[]]></author>
-    <tab><![CDATA[payments_gateways]]></tab>
-    <confirmUninstall>Are you sure you want to delete your MOLPay Payment Module details ?</confirmUninstall>
-    <is_configurable>1</is_configurable>
-    <need_instance>1</need_instance>
-    <limited_countries></limited_countries>
+	<name>molpay</name>
+	<displayName><![CDATA[MOLPay Malaysia Online Payment Gateway]]></displayName>
+	<version><![CDATA[2.1.1]]></version>
+	<description><![CDATA[Accept payments with MOLPay]]></description>
+	<author><![CDATA[]]></author>
+	<tab><![CDATA[payments_gateways]]></tab>
+	<confirmUninstall><![CDATA[Are you sure you want to delete your details ?]]></confirmUninstall>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+	<limited_countries></limited_countries>
 </module>

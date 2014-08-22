@@ -12,12 +12,30 @@ Use at your own risk. Please backup any critical data before proceeding. For any
 assistance, please email support@molpay.com 
 
 
-Installations for Prestashop 
------------------------------
+Installations for Prestashop version 1.6.0.x and above
+------------------------------------------------------
 
-[Prestashop version 1.5.5.x and below](https://github.com/MOLPay/Prestashop_Plugin/wiki/Installation-for-prestashop-version-1.5.5.x-and-below)  
+- Download or clone this repository.
 
-[Prestashop version 1.5.6.x/1.6.0.x and above](https://github.com/MOLPay/Prestashop_Plugin/wiki/Installation-for-Prestashop-version-1.5.6.x&1.6.0.x-and-above)
+- Upload or copy those file and folder into your Prestashop root folder.
+
+- Please ensure the file permission is correct. It's recommended to CHMOD to 775.
+(Skip this if your magento is not hosted not in UNIX environment).
+
+- Login as Prestashop Store Admin, click to `Modules` > `Modules` menu.
+
+- Search MOLPay Malaysia Online Payment Gateway. Click the install button if it's not being install yet.
+
+- After installation is completed, Click on the `Configure` text to open the MOLPay back-end configuration.
+
+- Fill in the Merchant ID and Merchant Vkey into the respective fields. If you have problem regarding the Merchant ID and Merchant Vkey kindly contact our support.
+
+- Save the configuration.
+
+## Notes
+
+* Please test with sandbox account first before using a real one
+* If you encounter any problem, Submit an issued or mail to our support@molpay.com
 
 
 Contribution
