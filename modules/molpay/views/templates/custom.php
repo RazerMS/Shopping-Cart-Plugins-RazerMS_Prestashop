@@ -26,14 +26,16 @@
         <div class="container">
             <div id="logo-molpay">
                 <img src="http://molpay.com/v2/images/logo/molpay_logo_400x160_transparent_24bit.png" class="img-responsive img-rounded" alt="MOLPay logo" />
-                <?php if($status != '00'): ?>
-                <h2 class="text-danger"><i class="fa fa-times-circle"></i> Payment Failed</h2>
-                <?php else: ?>
+                <?php if($status == '00'): ?>
                 <h2 class="text-success"><i class="fa fa-check-circle"></i> Payment Completed</h2>
+                <?php elseif($status == '22'): ?>
+                <h2 class="text-success"><i class="fa fa-check-circle"></i> Payment Completed</h2>
+                <?php else: ?>
+                <h2 class="text-danger"><i class="fa fa-times-circle"></i> Payment Failed</h2>
                 <?php endif; ?>
                 <hr>
             </div>
-            <form action="<?php echo $_SERVER['REQUEST_URI'] ?>&gotoorder=" method="POST" id="molpay-form">
+            <form action="<?php echo $_SERVER['REQUEST_URI'] ?>&gotoorder=<?php echo $_POST['orderid'] ?>" method="POST" id="molpay-form">
                 <?php foreach($_POST as $name => $value): ?>
                 <input type="hidden" name="<?php echo $name; ?>" value="<?php echo $value; ?>" />            
                 <?php endforeach; ?>
