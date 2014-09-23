@@ -40,17 +40,22 @@ class MOLPaycallback_ipnModuleFrontController extends ModuleFrontController {
         $key0 = md5($tranID.$orderid.$status.$domain.$amount.$currency);
         $key1 = md5($paydate.$domain.$key0.$appcode.$vkey);
 
-        if ($skey != $key1)
-            $status = "-1";
-
         if ( $nbcb=="1" ) {
             if($status == "00") {
+            if ($skey != $key1)
+            {
+                $this->module->validateOrder($orderid, Configuration::get('PS_OS_ERROR'), $amount, $this->module->displayName, $errors . '/r/n MOLPay Transaction ID: ' . $tranID, NULL, (int)$cart->id_currency, false, $customer->secure_key);
+            }
+            else
+            {
                 $this->module->validateOrder($orderid, Configuration::get('PS_OS_PAYMENT'), $amount, $this->module->displayName, 'MOLPay Transaction ID: ' . $tranID, NULL, (int)$cart->id_currency, false, $customer->secure_key);
                 echo "CBTOKEN:MPSTATOK";
                 exit;
             }
+
+            }
             elseif ($status == "22") {
-            // Pending status
+                // Pending status
                 $this->module->validateOrder($orderid, Configuration::get('PS_OS_PREPARATION'), $amount, $this->module->displayName, 'MOLPay Transaction ID: ' . $tranID, NULL, (int)$currency->id, false, $customer->secure_key);
             }
             else 

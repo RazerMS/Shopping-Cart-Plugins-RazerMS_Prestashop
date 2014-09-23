@@ -53,8 +53,8 @@ class MOLPayValidationModuleFrontController extends ModuleFrontController {
         $key0 = md5($tranID.$orderid.$status.$domain.$amount.$currency);
         $key1 = md5($paydate.$domain.$key0.$appcode.$vkey);
 
-        if ($skey != $key1)
-            $status = "-1";
+        //if ($skey != $key1)
+        //    $status = "-1";
 
         $currency = $this->context->currency;
         $total = (float)$cart->getOrderTotal(true, Cart::BOTH);
@@ -71,7 +71,14 @@ class MOLPayValidationModuleFrontController extends ModuleFrontController {
          *
          */
         if($status == "00") {
-            $this->module->validateOrder($orderid, Configuration::get('PS_OS_PAYMENT'), $amount, $this->module->displayName, 'MOLPay Transaction ID: ' . $tranID, NULL, (int)$currency->id, false, $customer->secure_key);
+             if ($skey != $key1)
+             {
+                $this->module->validateOrder($orderid, Configuration::get('PS_OS_ERROR'), $amount, $this->module->displayName, $errors . '/r/n MOLPay Transaction ID: ' . $tranID, NULL, (int)$currency->id, false, $customer->secure_key);
+             }
+             else
+             {
+                $this->module->validateOrder($orderid, Configuration::get('PS_OS_PAYMENT'), $amount, $this->module->displayName, 'MOLPay Transaction ID: ' . $tranID, NULL, (int)$currency->id, false, $customer->secure_key);
+             }
         }
         else {
             if($status == "22"){
