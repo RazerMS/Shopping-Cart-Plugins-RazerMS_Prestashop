@@ -20,7 +20,7 @@ Installations for Prestashop version 1.5.6.x/1.6.0.x and above
 - Upload or copy those file and folder into your Prestashop root folder.
 
 - Please ensure the file permission is correct. It's recommended to CHMOD to 775.
-(Skip this if your magento is not hosted not in UNIX environment).
+(Skip this if your Prestashop is not hosted not in UNIX environment).
 
 - Login as Prestashop Store Admin, click to `Modules` > `Modules` menu.
 
