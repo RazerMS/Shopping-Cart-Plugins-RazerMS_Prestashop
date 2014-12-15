@@ -29,7 +29,7 @@
                 <?php if($status == '00'): ?>                
                 <h2 class="text-success"><i class="fa fa-check-circle"></i> Payment Completed</h2>
                 <?php elseif($status == '22'): ?>                
-                <h2 class="text-success"><i class="fa fa-check-circle"></i> Awaiting Payment from customer</h2>
+                <h2 class="text-success"><i class="fa fa-check-circle"></i> Awaiting Cash Payment from customer</h2>
                 <br />
                 <p> Kindly make a payment within 48 hours. </p>
                 <?php else: ?>
