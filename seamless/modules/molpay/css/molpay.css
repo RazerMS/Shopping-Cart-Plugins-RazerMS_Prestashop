@@ -1,0 +1,32 @@
+.molpay_module {
+    margin-left:0px;
+    padding-left:5px;
+    margin-top:0px !important;
+    border:0px solid #505050;
+}
+.mpbutton {
+    cursor:pointer;
+    margin:0px;
+    width:100%;
+    text-transform:uppercase;
+    text-align:left;
+    padding-left:160px;
+    height:53px;
+    background:url('../img/molpay.gif') no-repeat 13px 0px;
+    border:none;
+}
+#mpdiv{
+    height:103px;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+    position: relative;
+    padding-top: 0;
+    border-bottom: 1px dotted #ccc;
+    font-weight: normal;
+    opacity: 0.8;
+    border-top:1px dotted #ccc;
+}
+#mpdiv:hover{
+    opacity:1;
+}    
