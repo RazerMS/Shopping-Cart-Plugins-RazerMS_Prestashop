@@ -19,6 +19,7 @@ Installations for Prestashop
 
 [Prestashop version 1.5.6.x/1.6.0.x and above](https://github.com/MOLPay/Prestashop_Plugin/wiki/Installation-for-Prestashop-version-1.5.6.x&1.6.0.x-and-above)
 
+[Seamless for Prestashop version 1.6.0.x and above](https://github.com/MOLPay/Prestashop_Plugin/wiki/Installation-Seamless-for-Prestashop-version-1.6.0.x-and-above)
 
 Contribution
 ------------
