@@ -261,7 +261,8 @@ class MOLPay extends PaymentModule {
         $currency_obj = $this->context->currency;
         $currency_code = $currency_obj->iso_code;
         $orderid = (int)$this->context->cart->id;
-        $amount = $amount = $this->context->cart->getOrderTotal(true, Cart::BOTH);
+        $amount = $this->context->cart->getOrderTotal(true, Cart::BOTH);
+		$amount = number_format($amount,2,".","");
         $bill_name = $customer->firstname." ".$customer->lastname;
         $bill_email = $customer->email;
         
