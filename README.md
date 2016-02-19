@@ -2,7 +2,7 @@ MOLPay Prestashop Plugin
 =====================
 ![MOLPay Technical Teams](https://github.com/MOLPay/Prestashop_Plugin/wiki/images/molpay-developer.jpg)
 
-The MOLPay Prestashop Plugin makes it easy to add MOLPay support to your Prestashop shopping cart.
+The MOLPay Prestashop Plugin makes it easy to add MOLPay payment gateway to your Prestashop shopping cart.
 
 Prerequisites
 -------------
