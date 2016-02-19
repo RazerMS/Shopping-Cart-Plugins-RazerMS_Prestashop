@@ -8,14 +8,13 @@ Prerequisites
 -------------
 
 * PHP 5.2 or later.
+* MOLPay Production or Development [account](http://www.molpay.com/v3/contact/merchant-enquiry).
 
 Documentation
 -------------
 
 * [Getting Started](https://github.com/MOLPay/Prestashop_Plugin/wiki#getting-started) - Everything you need to begin using this plugins.
-* Quick Start - For those looking to hit the ground running!
-* FAQ
-* Contributing to the Plugin
+* [Contributing to the Plugin](https://github.com/MOLPay/Prestashop_Plugin/wiki/Contributing-to-the-Plugin)
 
 General documentation regarding the MOLPay API and related payment flows can be found on the MOLPay Merchant Admin Site.
 
