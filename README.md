@@ -14,7 +14,7 @@ Documentation
 -------------
 
 * [Getting Started](https://github.com/MOLPay/Prestashop_Plugin/wiki#getting-started) - Everything you need to begin using this plugins.
-* [FAQ]([FAQ](https://github.com/MOLPay/Prestashop_Plugin/wiki/Frequently-Asked-Questions))
+* [FAQ](https://github.com/MOLPay/Prestashop_Plugin/wiki/Frequently-Asked-Questions)
 * Contributing to the Plugin
 
 General documentation regarding the MOLPay API and related payment flows can be found on the MOLPay Merchant Admin Site.
