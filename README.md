@@ -1,37 +1,23 @@
 MOLPay Prestashop Plugin
 =====================
+![MOLPay Technical Teams](https://github.com/MOLPay/Prestashop_Plugin/wiki/images/molpay-developer.jpg)
 
-MOLPay Plugin for Prestashop Shopping Cart develop by MOLPay technical team.
+The MOLPay Prestashop Plugin makes it easy to add MOLPay support to your Prestashop shopping cart.
 
+Prerequisites
+-------------
 
-Notes
------
+* PHP5
 
-MOLPay Sdn. Bhd. is not responsible for any problems that might arise from the use of this module. 
-Use at your own risk. Please backup any critical data before proceeding. For any query or 
-assistance, please email support@molpay.com 
+Documentation
+-------------
 
+* Getting Started - Everything you need to begin using this plugins.
+* Quick Start - For those looking to hit the ground running!
+* FAQ
+* Contributing to the Plugin
 
-Installations for Prestashop 
------------------------------
-
-[Prestashop version 1.5.5.x and below](https://github.com/MOLPay/Prestashop_Plugin/wiki/Installation-for-prestashop-version-1.5.5.x-and-below)  
-
-[Prestashop version 1.5.6.x/1.6.0.x and above](https://github.com/MOLPay/Prestashop_Plugin/wiki/Installation-for-Prestashop-version-1.5.6.x&1.6.0.x-and-above)
-
-[Seamless for Prestashop version 1.6.0.x and above](https://github.com/MOLPay/Prestashop_Plugin/wiki/Installation-Seamless-for-Prestashop-version-1.6.0.x-and-above)
-
-Contribution
-------------
-
-You can contribute to this plugin by sending the pull request to this repository.
-
-
-Issues
-------------
-
-Submit issue to this repository or email to our support@molpay.com
-
+General documentation regarding the MOLPay API and related payment flows can be found on the MOLPay Merchant Admin Site.
 
 Support
 -------
