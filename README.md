@@ -8,6 +8,7 @@ Prerequisites
 -------------
 
 * PHP 5.2 or later.
+* MOLPay Production or Development account.
 
 Documentation
 -------------
