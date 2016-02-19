@@ -12,7 +12,7 @@ Prerequisites
 Documentation
 -------------
 
-* Getting Started - Everything you need to begin using this plugins.
+* [Getting Started](https://github.com/MOLPay/Prestashop_Plugin/wiki#getting-started) - Everything you need to begin using this plugins.
 * Quick Start - For those looking to hit the ground running!
 * FAQ
 * Contributing to the Plugin
