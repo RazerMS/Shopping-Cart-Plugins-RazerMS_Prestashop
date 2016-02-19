@@ -7,7 +7,7 @@ The MOLPay Prestashop Plugin makes it easy to add MOLPay payment gateway to your
 Prerequisites
 -------------
 
-* PHP5
+* PHP 5.2 or later.
 
 Documentation
 -------------
