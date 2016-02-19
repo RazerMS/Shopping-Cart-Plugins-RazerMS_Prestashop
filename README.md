@@ -8,7 +8,7 @@ Prerequisites
 -------------
 
 * PHP 5.2 or later.
-* MOLPay Production or Development account.
+* MOLPay Production or Development [account](http://www.molpay.com/v3/contact/merchant-enquiry).
 
 Documentation
 -------------
