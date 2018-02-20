@@ -63,7 +63,7 @@ class MOLPay extends PaymentModule {
 		$config = Configuration::getMultiple(array('MOLPAY_MERCHANT_VKEY', 'MOLPAY_MERCHANT_PVKEY', 'MOLPAY_MERCHANT_ACCTYPE', 'MOLPAY_MERCHANT_ID', 'MOLPAY_SEAMLESS_JS'));
 		if(isset($config['MOLPAY_MERCHANT_VKEY']))
 			$this->MOLPAY_MERCHANT_VKEY = $config['MOLPAY_MERCHANT_VKEY'];
-		if(isset($config['MOLPAY_MERCHANT_PVKEY']))
+		if(isset($config['MOLPAY_MERCHANT_PVKEY'])) 
                         $this->MOLPAY_MERCHANT_PVKEY = $config['MOLPAY_MERCHANT_PVKEY'];
                 if(isset($config['MOLPAY_MERCHANT_ACCTYPE']))
                         $this->MOLPAY_MERCHANT_PVKEY = $config['MOLPAY_MERCHANT_ACCTYPE'];
