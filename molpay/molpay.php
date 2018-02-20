@@ -15,37 +15,37 @@ class MOLPay extends PaymentModule {
 	private $_html = '';
 	private $_postErrors = array();
 	private $molpay_channels = array(
-			'credit' 				=> array( 'name' => "Credit Card/ Debit Card", 'logo' => "http://molpay.com/v3/images/molpay/channel/credit.png", 'currency' => array("MYR") ),
-			'maybank2u' 		=> array( 'name' => "Maybank(Maybank2u)", 'logo' => "http://molpay.com/v3/images/molpay/channel/maybank2u.png", 'currency' => array("MYR") ),
-			'cimbclicks' 		=> array( 'name' => "CIMB Bank(CIMB Clicks)", 'logo' => "http://molpay.com/v3/images/molpay/channel/cimb.png", 'currency' => array("MYR") ),
+			'credit' 	=> array( 'name' => "Credit Card/ Debit Card", 'logo' => "http://molpay.com/v3/images/molpay/channel/credit.png", 'currency' => array("MYR") ),
+			'maybank2u' 	=> array( 'name' => "Maybank(Maybank2u)", 'logo' => "http://molpay.com/v3/images/molpay/channel/maybank2u.png", 'currency' => array("MYR") ),
+			'cimbclicks' 	=> array( 'name' => "CIMB Bank(CIMB Clicks)", 'logo' => "http://molpay.com/v3/images/molpay/channel/cimb.png", 'currency' => array("MYR") ),
 			'affinonline' 	=> array( 'name' => "Affin Bank(Affin Online)", 'logo' => "http://molpay.com/v3/images/molpay/channel/affin-epg.png", 'currency' => array("MYR") ),
-			'amb' 					=> array( 'name' => "Am Bank (Am Online)", 'logo' => "http://molpay.com/v3/images/molpay/channel/amb.png", 'currency' => array("MYR") ),
-			'fpx' 					=> array( 'name' => "MyClear FPX (Maybank2u, CIMB Clicks, HLB Connect, RHB Now, PBB Online, Bank Islam, etc)", 'logo' => "http://molpay.com/v3/images/molpay/channel/fpx.png", 'currency' => array("MYR") ),
-			'fpx_amb'				=> array( 'name' => "FPX Am Bank (Am Online)", 'logo' => "http://molpay.com/v3/images/molpay/channel/amb.png", 'currency' => array("MYR") ),
-			'fpx_bimb'			=> array( 'name' => "FPX Bank Islam", 'logo' => "http://molpay.com/v3/images/molpay/channel/bankislam.png", 'currency' => array("MYR") ),
+			'amb' 		=> array( 'name' => "Am Bank (Am Online)", 'logo' => "http://molpay.com/v3/images/molpay/channel/amb.png", 'currency' => array("MYR") ),
+			'fpx' 		=> array( 'name' => "MyClear FPX (Maybank2u, CIMB Clicks, HLB Connect, RHB Now, PBB Online, Bank Islam, etc)", 'logo' => "http://molpay.com/v3/images/molpay/channel/fpx.png", 'currency' => array("MYR") ),
+			'fpx_amb'	=> array( 'name' => "FPX Am Bank (Am Online)", 'logo' => "http://molpay.com/v3/images/molpay/channel/amb.png", 'currency' => array("MYR") ),
+			'fpx_bimb'	=> array( 'name' => "FPX Bank Islam", 'logo' => "http://molpay.com/v3/images/molpay/channel/bankislam.png", 'currency' => array("MYR") ),
 			'fpx_cimbclicks'=> array( 'name' => "FPX CIMB Bank(CIMB Clicks)", 'logo' => "http://molpay.com/v3/images/molpay/channel/cimb.png", 'currency' => array("MYR") ),
-			'fpx_hlb'				=> array( 'name' => "FPX Hong Leong Bank(HLB Connect)", 'logo' => "http://molpay.com/v3/images/molpay/channel/hlb.png", 'currency' => array("MYR") ),
-			'fpx_mb2u'			=> array( 'name' => "FPX Maybank(Maybank2u)", 'logo' => "http://molpay.com/v3/images/molpay/channel/maybank2u.png", 'currency' => array("MYR") ),
-			'fpx_pbb'				=> array( 'name' => "FPX PublicBank (PBB Online)", 'logo' => "http://molpay.com/v3/images/molpay/channel/publicbank.png", 'currency' => array("MYR") ),
-			'fpx_rhb'				=> array( 'name' => "FPX RHB Bank(RHB Now)", 'logo' => "http://molpay.com/v3/images/molpay/channel/rhb.png", 'currency' => array("MYR") ),
-			'hlb' 					=> array( 'name' => "Hong Leong Bank(HLB Connect)", 'logo' => "http://molpay.com/v3/images/molpay/channel/hlb.png", 'currency' => array("MYR") ),
-			'pbb' 					=> array( 'name' => "PublicBank (PBB Online)", 'logo' => "http://molpay.com/v3/images/molpay/channel/publicbank.png", 'currency' => array("MYR") ),
-			'rhb' 					=> array( 'name' => "RHB Bank(RHB Now)", 'logo' => "http://molpay.com/v3/images/molpay/channel/rhb.png", 'currency' => array("MYR") ),
-			'cash-711' 			=> array( 'name' => "7-Eleven(MOLPay Cash)", 'logo' => "http://molpay.com/v3/images/molpay/channel/cash.png", 'currency' => array("MYR") ),
-			'ATMVA' 				=> array( 'name' => "ATM Transfer via Permata Bank", 'logo' => "http://molpay.com/v3/images/molpay/channel/Cash-PermataBank.png", 'currency' => array("IDR") ),
-			'dragonpay' 		=> array( 'name' => "Dragonpay", 'logo' => "http://molpay.com/v3/images/molpay/channel/dragonpay.png", 'currency' => array("PHP") ),
-			'paysbuy' 			=> array( 'name' => "PaysBuy", 'logo' => "http://molpay.com/v3/images/molpay/channel/paysbuy.png", 'currency' => array("THB","AUD","GBP","EUR","HKD","JPY","NZD","SGD","CHF","USD") ),
+			'fpx_hlb'	=> array( 'name' => "FPX Hong Leong Bank(HLB Connect)", 'logo' => "http://molpay.com/v3/images/molpay/channel/hlb.png", 'currency' => array("MYR") ),
+			'fpx_mb2u'	=> array( 'name' => "FPX Maybank(Maybank2u)", 'logo' => "http://molpay.com/v3/images/molpay/channel/maybank2u.png", 'currency' => array("MYR") ),
+			'fpx_pbb'	=> array( 'name' => "FPX PublicBank (PBB Online)", 'logo' => "http://molpay.com/v3/images/molpay/channel/publicbank.png", 'currency' => array("MYR") ),
+			'fpx_rhb'	=> array( 'name' => "FPX RHB Bank(RHB Now)", 'logo' => "http://molpay.com/v3/images/molpay/channel/rhb.png", 'currency' => array("MYR") ),
+			'hlb' 		=> array( 'name' => "Hong Leong Bank(HLB Connect)", 'logo' => "http://molpay.com/v3/images/molpay/channel/hlb.png", 'currency' => array("MYR") ),
+			'pbb' 		=> array( 'name' => "PublicBank (PBB Online)", 'logo' => "http://molpay.com/v3/images/molpay/channel/publicbank.png", 'currency' => array("MYR") ),
+			'rhb' 		=> array( 'name' => "RHB Bank(RHB Now)", 'logo' => "http://molpay.com/v3/images/molpay/channel/rhb.png", 'currency' => array("MYR") ),
+			'cash-711' 	=> array( 'name' => "7-Eleven(MOLPay Cash)", 'logo' => "http://molpay.com/v3/images/molpay/channel/cash.png", 'currency' => array("MYR") ),
+			'ATMVA' 	=> array( 'name' => "ATM Transfer via Permata Bank", 'logo' => "http://molpay.com/v3/images/molpay/channel/Cash-PermataBank.png", 'currency' => array("IDR") ),
+			'dragonpay' 	=> array( 'name' => "Dragonpay", 'logo' => "http://molpay.com/v3/images/molpay/channel/dragonpay.png", 'currency' => array("PHP") ),
+			'paysbuy' 	=> array( 'name' => "PaysBuy", 'logo' => "http://molpay.com/v3/images/molpay/channel/paysbuy.png", 'currency' => array("THB","AUD","GBP","EUR","HKD","JPY","NZD","SGD","CHF","USD") ),
 			'Point-BCard' 	=> array( 'name' => "Bcard points", 'logo' => "http://molpay.com/v3/images/molpay/channel/pointbcard.png", 'currency' => array("MYR") ),
-			'NGANLUONG' 		=> array( 'name' => "NGANLUONG", 'logo' => "http://molpay.com/v3/images/molpay/channel/nganluong.png", 'currency' => array("VND","USD") ),
-			'enetsD' 				=> array( 'name' => "eNETS", 'logo' => "http://molpay.com/v3/images/molpay/channel/enetsD.png", 'currency' => array("SGD") ),
-			'UPOP'	 				=> array( 'name' => "China Union pay", 'logo' => "http://molpay.com/v3/images/molpay/channel/Unionpay.png", 'currency' => array("MYR","USD","CNY") ),
-			'alipay' 				=> array( 'name' => "Alipay", 'logo' => "http://molpay.com/v3/images/molpay/channel/alipay.png", 'currency' => array("MYR","USD","CNY") ),
-			'paypal' => array( 'name' => "PayPal", 'logo' => "http://molpay.com/v3/images/molpay/channel/paypal.png", 'currency' => array("USD","AUD","GBP","CAD","CZK","DKK","EUR","HKD","HUF","ILS","JPY","MYR","MXN","NZD","NOK","PHP","PLN","SGD","SEK","CHF","TWD","THB") ),
-			'cash-epay' 		=> array( 'name' => "e-Pay", 'logo' => "http://molpay.com/v3/images/molpay/channel/epay.png", 'currency' => array("MYR") ),
-			'molwallet' 		=> array( 'name' => "MOLWallet", 'logo' => "http://molpay.com/v3/images/molpay/channel/MOLWallet.png", 'currency' => array("MYR") ),
-			'PEXPLUS' 		=> array( 'name' => "PEx+", 'logo' => "http://molpay.com/v3/images/molpay/channel/pexplus.png", 'currency' => array("MYR") ),
-			'jompay' 		=> array( 'name' => "JOMPay", 'logo' => "http://molpay.com/v3/images/molpay/channel/jompay.png", 'currency' => array("MYR") ),
-			'Cash-Esapay' 		=> array( 'name' => "Cash Esapay", 'logo' => "http://molpay.com/v3/images/molpay/channel/esapay.png", 'currency' => array("MYR") )
+			'NGANLUONG' 	=> array( 'name' => "NGANLUONG", 'logo' => "http://molpay.com/v3/images/molpay/channel/nganluong.png", 'currency' => array("VND","USD") ),
+			'enetsD' 	=> array( 'name' => "eNETS", 'logo' => "http://molpay.com/v3/images/molpay/channel/enetsD.png", 'currency' => array("SGD") ),
+			'UPOP'	 	=> array( 'name' => "China Union pay", 'logo' => "http://molpay.com/v3/images/molpay/channel/Unionpay.png", 'currency' => array("MYR","USD","CNY") ),
+			'alipay' 	=> array( 'name' => "Alipay", 'logo' => "http://molpay.com/v3/images/molpay/channel/alipay.png", 'currency' => array("MYR","USD","CNY") ),
+			'paypal'        => array( 'name' => "PayPal", 'logo' => "http://molpay.com/v3/images/molpay/channel/paypal.png", 'currency' => array("USD","AUD","GBP","CAD","CZK","DKK","EUR","HKD","HUF","ILS","JPY","MYR","MXN","NZD","NOK","PHP","PLN","SGD","SEK","CHF","TWD","THB") ),
+			'cash-epay' 	=> array( 'name' => "e-Pay", 'logo' => "http://molpay.com/v3/images/molpay/channel/epay.png", 'currency' => array("MYR") ),
+			'molwallet' 	=> array( 'name' => "MOLWallet", 'logo' => "http://molpay.com/v3/images/molpay/channel/MOLWallet.png", 'currency' => array("MYR") ),
+			'PEXPLUS' 	=> array( 'name' => "PEx+", 'logo' => "http://molpay.com/v3/images/molpay/channel/pexplus.png", 'currency' => array("MYR") ),
+			'jompay' 	=> array( 'name' => "JOMPay", 'logo' => "http://molpay.com/v3/images/molpay/channel/jompay.png", 'currency' => array("MYR") ),
+			'Cash-Esapay' 	=> array( 'name' => "Cash Esapay", 'logo' => "http://molpay.com/v3/images/molpay/channel/esapay.png", 'currency' => array("MYR") )
 		);
 
 	public function __construct() {
@@ -60,9 +60,13 @@ class MOLPay extends PaymentModule {
 		$this->currencies_mode = 'checkbox';        
 		$this->bootstrap = true;
 
-		$config = Configuration::getMultiple(array('MOLPAY_MERCHANT_VKEY', 'MOLPAY_MERCHANT_ID', 'MOLPAY_SEAMLESS_JS'));
+		$config = Configuration::getMultiple(array('MOLPAY_MERCHANT_VKEY', 'MOLPAY_MERCHANT_PVKEY', 'MOLPAY_MERCHANT_ACCTYPE', 'MOLPAY_MERCHANT_ID', 'MOLPAY_SEAMLESS_JS'));
 		if(isset($config['MOLPAY_MERCHANT_VKEY']))
 			$this->MOLPAY_MERCHANT_VKEY = $config['MOLPAY_MERCHANT_VKEY'];
+		if(isset($config['MOLPAY_MERCHANT_PVKEY']))
+                        $this->MOLPAY_MERCHANT_PVKEY = $config['MOLPAY_MERCHANT_PVKEY'];
+                if(isset($config['MOLPAY_MERCHANT_ACCTYPE']))
+                        $this->MOLPAY_MERCHANT_PVKEY = $config['MOLPAY_MERCHANT_ACCTYPE'];
 		if(isset($config['MOLPAY_MERCHANT_ID']))
 			$this->MOLPAY_MERCHANT_ID = $config['MOLPAY_MERCHANT_ID'];
 		if(isset($config['MOLPAY_SEAMLESS_JS']))
@@ -78,6 +82,8 @@ class MOLPay extends PaymentModule {
 				$this->warning = $this->l('No currency set for this module');
 		if(!isset($this->MOLPAY_MERCHANT_VKEY) || !isset($this->MOLPAY_MERCHANT_ID))
 				$this->warning = $this->l('Your MOLPay account must be set correctly');
+                if(!isset($this->MOLPAY_MERCHANT_PVKEY) || !isset($this->MOLPAY_MERCHANT_ID))
+                                $this->warning = $this->l('Your MOLPay account must be set correctly');
 		if(!isset($this->MOLPAY_SEAMLESS_JS) || !isset($this->MOLPAY_SEAMLESS_JS))
 				$this->warning = $this->l('This plugin required MOLPay Seamless API javascript file to be loaded.');
 	}
@@ -108,7 +114,7 @@ class MOLPay extends PaymentModule {
 					return false;
 			}
 		}
-		if (!Configuration::deleteByName('MOLPAY_MERCHANT_VKEY') || !Configuration::deleteByName('MOLPAY_MERCHANT_ID') || !Configuration::deleteByName('MOLPAY_SEAMLESS_JS') || !parent::uninstall())
+		if (!Configuration::deleteByName('MOLPAY_MERCHANT_VKEY') || !Configuration::deleteByName('MOLPAY_MERCHANT_PVKEY') || !Configuration::deleteByName('MOLPAY_MERCHANT_ACCTYPE') || !Configuration::deleteByName('MOLPAY_MERCHANT_ID') || !Configuration::deleteByName('MOLPAY_SEAMLESS_JS') || !parent::uninstall())
 			return false;
 		else
 			return true;
@@ -123,7 +129,11 @@ class MOLPay extends PaymentModule {
 			if (!Tools::getValue('merchant_id'))
 				$this->_postErrors[] = $this->l('Merchant ID is required');
 			else if (!Tools::getValue('merchant_vkey'))
-				$this->_postErrors[] = $this->l('Merchant VKey is required.');
+				$this->_postErrors[] = $this->l('Merchant Verify Key is required.');
+			else if (!Tools::getValue('merchant_pvkey'))
+                                $this->_postErrors[] = $this->l('Merchant Secret Key is required.');	
+			else if (!Tools::getValue('merchant_acctype'))
+                                $this->_postErrors[] = $this->l('Merchant Account Type is required.');
 			else if (!Tools::getValue('seamless_js'))
 				$this->_postErrors[] = $this->l('Seamless javascript URL is required.');
 		}
@@ -138,7 +148,9 @@ class MOLPay extends PaymentModule {
 		if (isset($_POST['btnSubmit'])) {
 			Configuration::updateValue('MOLPAY_MERCHANT_ID', Tools::getValue('merchant_id'));
 			Configuration::updateValue('MOLPAY_MERCHANT_VKEY', Tools::getValue('merchant_vkey'));
-			Configuration::updateValue('MOLPAY_SEAMLESS_JS', Tools::getValue('seamless_js'));
+                        Configuration::updateValue('MOLPAY_MERCHANT_PVKEY', Tools::getValue('merchant_pvkey'));
+			Configuration::updateValue('MOLPAY_MERCHANT_ACCTYPE', Tools::getValue('merchant_acctype'));
+			Configuration::updateValue('MOLPAY_SEAMLESS_JS', Tools::getValue('merchant_acctype')."MOLPay/API/seamless/latest/js/MOLPay_seamless.deco.js");
 			foreach( $this->molpay_channels As $k => $v )
 				Configuration::updateValue($k."_on", Tools::getValue($k."_on"));
 		}
@@ -304,19 +316,50 @@ class MOLPay extends PaymentModule {
 						'required' => true
 					),
 					array(
-						'type' => 'text',
+                                                'type' => 'text',
+                                                'label' => $this->l('Secret Key'),
+                                                'name' => 'merchant_pvkey',
+                                                'required' => true
+                                        ),
+                                        array(
+                                                'type' => 'radio',
+                                                'label' => $this->l('Account Type'),
+                                                'name' => 'merchant_acctype',
+						    'values' => array(
+						                array(
+                                                'id' => 'production',
+                                                'label' => $this->l('Production'),
+                                                'value' => 'https://www.onlinepayment.com.my/'
+                                                                     ),
+								array(
+								        'id' => 'sandbox',
+								        'label' => $this->l('Sandbox'),
+									    'value' => 'https://sandbox.molpay.com/'
+                                                                     ),
+							   	 ),
+                                                'required'  => true,
+                                                'class'     => 't'
+                                        ),
+					array(
+						'type' => 'hidden',
 						'label' => $this->l('Seamless JS URL'),
 						'name' => 'seamless_js',
 						'desc' => ' Get latest version at <a target="_blank" href="https://github.com/MOLPay/Seamless_Integration">here</a>.',
+						//'readonly' => 'readonly',
 						'required' => true
 					),
 				),
+				
 				'submit' => array(
 					'title' => $this->l('Save'),
 				)
 			),
 		);
-		
+		$fields_form['form']['input'][] =array(
+						
+						'label' => $this->l('Payment Channel'),
+					);
+			
 		foreach( $this->molpay_channels As $k => $v )
 		{
 			$fields_form['form']['input'][] = array(
@@ -359,16 +402,25 @@ class MOLPay extends PaymentModule {
 
 	public function getConfigFieldsValues()
 	{
+		$MOLPAY_MERCHANT_ACCTYPE = Configuration::get('MOLPAY_MERCHANT_ACCTYPE');
 		$MOLPAY_SEAMLESS_JS = Configuration::get('MOLPAY_SEAMLESS_JS');
-		if( empty($MOLPAY_SEAMLESS_JS) )
-			//$MOLPAY_SEAMLESS_JS = "https://www.onlinepayment.com.my/MOLPay/API/seamless/3.11/js/MOLPay_seamless.deco.js";
+		
+		//$MOLPAY_SEAMLESS_JS = $MOLPAY_MERCHANT_ACCTYPE."MOLPay/API/seamless/latest/js/MOLPay_seamless.deco.js";
+		/*if ($MOLPAY_MERCHANT_ACCTYPE == 'https://www.onlinepayment.com.my/')
+		{
 			$MOLPAY_SEAMLESS_JS = "https://www.onlinepayment.com.my/MOLPay/API/seamless/latest/js/MOLPay_seamless.deco.js";
-		
-		
+		}else{
+			$MOLPAY_SEAMLESS_JS = "https://sandbox.molpay.com/MOLPay/API/seamless/latest/js/MOLPay_seamless.deco.js";
+		}*/
+		/*if( empty($MOLPAY_SEAMLESS_JS) )
+			$MOLPAY_SEAMLESS_JS = "https://www.onlinepayment.com.my/MOLPay/API/seamless/latest/js/MOLPay_seamless.deco.js"; */
+
 		$result = array(
 			'merchant_id' => Tools::getValue('merchant_id', Configuration::get('MOLPAY_MERCHANT_ID')),
 			'merchant_vkey' => Tools::getValue('merchant_vkey', Configuration::get('MOLPAY_MERCHANT_VKEY')),
-			'seamless_js' => Tools::getValue('seamless_js', $MOLPAY_SEAMLESS_JS),
+            'merchant_pvkey' => Tools::getValue('merchant_pvkey', Configuration::get('MOLPAY_MERCHANT_PVKEY')),
+            'merchant_acctype' => Tools::getValue('merchant_acctype', Configuration::get('MOLPAY_MERCHANT_ACCTYPE')),
+			'seamless_js' => Tools::getValue('seamless_js', Configuration::get('MOLPAY_SEAMLESS_JS')),
 		);
 		
 		foreach( $this->molpay_channels As $k => $v )
