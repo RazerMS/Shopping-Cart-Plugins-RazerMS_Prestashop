@@ -1,6 +1,6 @@
 Razer Merchant Services Prestashop Plugin
 =====================
-<img src="https://user-images.githubusercontent.com/38641542/74149750-75bc0e80-4c43-11ea-9c65-b06ccb5e18d2.jpg">
+<img src="https://user-images.githubusercontent.com/38641542/74424141-5a900f80-4e8c-11ea-9452-dfd4d9ae1361.jpg">
 
 The Razer Merchant Services Prestashop Plugin makes it easy to add Razer Merchant Services payment gateway to your Prestashop shopping cart.
 
