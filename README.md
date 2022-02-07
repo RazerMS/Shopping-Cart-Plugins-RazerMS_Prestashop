@@ -1,4 +1,4 @@
-Razer Merchant Services Prestashop Plugin
+[Shopping Cart Plugins] – RazerMS Prestashop
 =====================
 <img src="https://user-images.githubusercontent.com/38641542/74424141-5a900f80-4e8c-11ea-9452-dfd4d9ae1361.jpg">
 
