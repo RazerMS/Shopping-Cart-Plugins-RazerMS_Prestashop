@@ -38,3 +38,8 @@ Channel/Partner Enquiry : channel-sa@razer.com <br>
 Media Contact : media-sa@razer.com <br>
 R&D and Tech-related Suggestion : technical-sa@razer.com <br>
 Abuse Reporting : abuse-sa@razer.com
+
+Additional Information
+----------------------
+
+[Critical Vulnerability in PrestaShop SQL Manager](https://www.csa.gov.sg/alerts-advisories/alerts/2023/al-2023-056)
